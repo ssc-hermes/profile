@@ -1,7 +1,13 @@
 {
+  "name": "@ssc-hermes/profile",
+  "description": "Profile data for *hermes*.",
   "type": "module",
   "version": "0.0.0",
   "main": "dist/index.js",
+  "types": "./dist/index.d.ts",
+  "directories": {
+    "test": "test"
+  },
   "scripts": {
     "lint": "standardx -v \"./**/*.ts\"",
     "build-tests": "esbuild test/*.ts --platform=node --format=esm --outdir=test --keep-names",
@@ -12,7 +18,14 @@
     "postversion": "git push && git push --tags && npm publish",
     "prepublishOnly": "npm run build"
   },
+  "dependencies": {
+    "@ssc-hermes/message": "^0.3.0",
+    "@ssc-hermes/util": "^0.3.1",
+    "monotonic-timestamp": "^0.0.9"
+  },
   "devDependencies": {
+    "@oddjs/odd": "^0.37.1",
+    "@ssc-hermes/node-components": "^0.0.5",
     "@typescript-eslint/parser": "^5.55.0",
     "esbuild": "^0.15.18",
     "standardx": "^7.0.0",
@@ -27,14 +40,20 @@
     },
     "./*": {
       "import": [
-        "./dist/*.js",
-        "./dist/*"
+        "./dist/*.js"
       ],
       "require": [
-        "./dist/*.cjs",
-        "./dist/*"
+        "./dist/*.cjs"
       ]
     }
+  },
+  "homepage": "https://github.com/ssc-hermes/profile#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ssc-hermes/profile.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ssc-hermes/profile/issues"
   },
   "keywords": [
     "template",
