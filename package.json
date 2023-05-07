@@ -4,7 +4,6 @@
   "type": "module",
   "version": "0.1.0",
   "main": "dist/index.js",
-  "types": "./dist/index.d.ts",
   "directories": {
     "test": "test"
   },
@@ -45,6 +44,17 @@
       ],
       "require": [
         "./dist/*.cjs"
+      ]
+    }
+  },
+  "types": "dist/index.d.ts",
+  "typesVersions": {
+    "*": {
+      "dist/index.d.ts": [
+        "dist/index.d.ts"
+      ],
+      "*": [
+        "dist/*"
       ]
     }
   },
