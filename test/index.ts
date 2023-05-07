@@ -20,8 +20,7 @@ test('setup', async t => {
 test('profile.create', async t => {
     const { crypto } = program.components
     const newProfile = await profile.create(crypto, {
-        humanName: 'Alice',
-        username: 'alice-123'
+        humanName: 'Alice'
     })
 
     t.ok(newProfile, 'should return a new profile')

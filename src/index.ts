@@ -2,6 +2,7 @@ import timestamp from 'monotonic-timestamp'
 import { Crypto } from '@oddjs/odd'
 import { writeKeyToDid } from '@ssc-hermes/util'
 import { create as createMsg, SignedRequest } from '@ssc-hermes/message'
+import { createUsername } from './util.js'
 
 export interface Profile {
     humanName: string
@@ -14,7 +15,7 @@ export interface Profile {
 
 interface ProfileArgs {
     humanName:string,
-    username:string,
+    username?:string,
     description?:string,
     rootDID?:string
 }
@@ -31,6 +32,7 @@ export async function create (crypto:Crypto.Implementation, args:ProfileArgs)
     return createMsg(crypto, Object.assign({}, args, {
         // author comes from `createMsg`
         timestamp: timestamp(),
+        username: (args.username || await createUsername(crypto)),
         rootDID: (args.rootDID || await writeKeyToDid(crypto))
     }))
 }

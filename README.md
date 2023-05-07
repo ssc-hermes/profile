@@ -25,9 +25,17 @@ const { crypto } = program.components
 
 // minimum parameters
 const newProfile = await profile.create(crypto, {
-    humanName: 'Alice',
-    username: 'abc123'
+    humanName: 'Alice'
 })
+
+// => {
+//   humanName: 'Alice',
+//   timestamp: 1683435717111,
+//   username: 'fyrckpeigjv23y7bc572af6o7jyovstt',
+//   rootDID: 'did:key:z13V3S...',
+//   author: 'did:key:z13V3S...',
+//   signature: 'i5rb0sMDx...'
+// }
 ```
 
 ```js
@@ -45,4 +53,17 @@ const newProfileTwo = await profile.create(crypto, {
 // the given `newProfileTwo.author` has been authorized by the given `rootDID`
 // to make changes to this username, and also check that the given username is
 // related to the given `rootDID`
+```
+
+## profile type
+
+```ts
+interface Profile {
+    humanName: string
+    author: string
+    username: string
+    rootDID: string
+    description?: string
+    timestamp:number
+}
 ```
