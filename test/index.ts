@@ -2,8 +2,9 @@ import { test } from 'tapzero'
 import * as odd from '@oddjs/odd'
 import { verify } from '@ssc-hermes/message'
 import { components } from '@ssc-hermes/node-components'
-import * as profile from '@ssc-hermes/profile'
 import { writeKeyToDid } from '@ssc-hermes/util'
+import * as util from '../dist/util.js'
+import * as profile from '../dist/index.js'
 
 let program
 
@@ -32,4 +33,12 @@ test('profile.create', async t => {
 
     const isValid = await verify(newProfile)
     t.equal(isValid, true, 'the new profile should have a valid signature')
+})
+
+test('create username', async t => {
+    const { crypto } = program.components
+    const username = await util.createUsername(crypto)
+    t.ok(username, 'should create a username')
+    t.equal(typeof username, 'string', 'usernmae should be a string')
+    t.equal(username.length, 32, 'should be 32 chars long')
 })

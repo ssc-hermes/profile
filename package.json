@@ -15,13 +15,14 @@
     "build-cjs": "esbuild src/*.ts --format=cjs --keep-names --outdir=./dist --out-extension:.js=.cjs",
     "build": "mkdir -p ./dist && rm -rf ./dist/* && npm run build-cjs && tsc",
     "preversion": "npm run lint",
-    "postversion": "git push && git push --tags && npm publish",
+    "postversion": "git push && git push --tags",
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
     "@ssc-hermes/message": "^0.3.0",
     "@ssc-hermes/util": "^0.3.1",
-    "monotonic-timestamp": "^0.0.9"
+    "monotonic-timestamp": "^0.0.9",
+    "uint8arrays": "^4.0.3"
   },
   "devDependencies": {
     "@oddjs/odd": "^0.37.1",

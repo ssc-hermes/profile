@@ -40,4 +40,9 @@ const newProfileTwo = await profile.create(crypto, {
     // machine, pass in the rootDID
     rootDID: 'did:key:z13V3...'
 })
+
+// then whoever is reading this message would need to see a UCAN that says that
+// the given `newProfileTwo.author` has been authorized by the given `rootDID`
+// to make changes to this username, and also check that the given username is
+// related to the given `rootDID`
 ```
