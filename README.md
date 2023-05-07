@@ -12,6 +12,7 @@ npm i -S ssc-hermes/profile
 ## example
 This creates `profile` objects in memory. You would then want to save it somehow.
 
+### minimal parameters
 ```js
 import * as odd from '@oddjs/odd'
 import * as profile from '@ssc-hermes/profile'
@@ -23,11 +24,11 @@ const program = await odd.program({
 
 const { crypto } = program.components
 
-// minimum parameters
+// minimal parameters
+// this assumes that the rootDID is the current machine
 const newProfile = await profile.create(crypto, {
     humanName: 'Alice'
 })
-// this assumes that the rootDID is the current machine
 
 // => {
 //   humanName: 'Alice',
@@ -39,22 +40,22 @@ const newProfile = await profile.create(crypto, {
 // }
 ```
 
+### more parameters
 ```js
 const newProfile2 = await profile.create(crypto, {
     humanName: 'Alice',
-    username: 'abc123',
     // can also create a description
     description: 'describing things',
     // if you are writing from a machine that is not the root
     // machine, pass in the rootDID
     rootDID: 'did:key:z13V3...'
 })
-
-// then whoever is reading this message would need to see a UCAN that says that
-// the given `newProfileTwo.author` has been authorized by the given `rootDID`
-// to make changes to this username, and also check that the given username is
-// related to the given `rootDID`
 ```
+
+Then a server reading this message would need to see a UCAN that says that
+the given `newProfileTwo.author` has been authorized by the `rootDID`
+to make changes to this username, and also check that the given username is
+related to the `rootDID`.
 
 ## profile type
 
