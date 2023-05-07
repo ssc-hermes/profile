@@ -57,6 +57,21 @@ the given `newProfileTwo.author` has been authorized by the `rootDID`
 to make changes to this username, and also check that the given username is
 related to the `rootDID`.
 
+### util.createUsername
+Helper that will create a DNS friendly, unique username based on your public key.
+
+```js
+import * as util from '@ssc-hermes/profile/util'
+
+test('create username', async t => {
+    const { crypto } = program.components
+    const username = await util.createUsername(crypto)
+    t.ok(username, 'should create a username')
+    t.equal(typeof username, 'string', 'usernmae should be a string')
+    t.equal(username.length, 32, 'should be 32 chars long')
+})
+```
+
 ## profile type
 
 ```ts
