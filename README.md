@@ -27,6 +27,7 @@ const { crypto } = program.components
 const newProfile = await profile.create(crypto, {
     humanName: 'Alice'
 })
+// this assumes that the rootDID is the current machine
 
 // => {
 //   humanName: 'Alice',
@@ -39,7 +40,7 @@ const newProfile = await profile.create(crypto, {
 ```
 
 ```js
-const newProfileTwo = await profile.create(crypto, {
+const newProfile2 = await profile.create(crypto, {
     humanName: 'Alice',
     username: 'abc123',
     // can also create a description
