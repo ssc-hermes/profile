@@ -36,8 +36,8 @@ const newProfileTwo = await profile.create(crypto, {
     username: 'abc123',
     // can also create a description
     description: 'describing things',
-    // if you are writing from a machine that is not the root machine,
-    // pass in the rootDID
+    // if you are writing from a machine that is not the root
+    // machine, pass in the rootDID
     rootDID: 'did:key:z13V3...'
 })
 ```
