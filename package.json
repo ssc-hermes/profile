@@ -1,8 +1,8 @@
 {
   "name": "@ssc-hermes/profile",
+  "version": "0.2.1",
   "description": "Profile data for *hermes*.",
   "type": "module",
-  "version": "0.2.1",
   "main": "dist/index.js",
   "directories": {
     "test": "test"

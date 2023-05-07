@@ -13,6 +13,8 @@ export interface Profile {
     timestamp:number
 }
 
+export type SignedProfile = SignedRequest<Profile>
+
 interface ProfileArgs {
     humanName:string,
     username?:string,
@@ -28,7 +30,7 @@ interface ProfileArgs {
  * @returns {Promise<SignedRequest<Profile>>} The new profile + signature
  */
 export async function create (crypto:Crypto.Implementation, args:ProfileArgs)
-:Promise<SignedRequest<Profile>> {
+:Promise<SignedProfile> {
     return createMsg(crypto, Object.assign({}, args, {
         // author comes from `createMsg`
         timestamp: timestamp(),
