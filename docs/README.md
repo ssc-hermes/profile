@@ -29,3 +29,8 @@ Then a server reading this message would need to see a UCAN that says that
 the given `newProfileTwo.author` has been authorized by the `rootDID`
 to make changes to this username, and also check that the given username is
 related to the `rootDID`.
+
+__check the permissions__
+We know the agentDID and a rootDID. Need to do a DNS lookup and check that the rootDID is related to the given username. Also need to see a UCAN chain that says agentDID is authorized by rootDID.
+
+Then you can update the profile record.

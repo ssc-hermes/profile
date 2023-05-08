@@ -8,7 +8,8 @@ npm i -S @ssc-hermes/profile
 ```
 
 ## example
-This creates `profile` objects in memory. You would then want to save it somehow.
+This creates a `profile` object in memory. You would then want to save the profile
+somehow.
 
 ### minimal parameters
 ```js
