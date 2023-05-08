@@ -3,10 +3,8 @@
 Profile data for *hermes*.
 
 ## install
-Install from github because this is a private repo
-
 ```bash
-npm i -S ssc-hermes/profile
+npm i -S @ssc-hermes/profile
 ```
 
 ## example
