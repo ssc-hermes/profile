@@ -50,11 +50,6 @@ const newProfile2 = await profile.create(crypto, {
 })
 ```
 
-Then a server reading this message would need to see a UCAN that says that
-the given `newProfileTwo.author` has been authorized by the `rootDID`
-to make changes to this username, and also check that the given username is
-related to the `rootDID`.
-
 ### util.createUsername
 Helper that will create a DNS friendly, unique username based on your public key.
 
