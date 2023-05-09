@@ -6,6 +6,7 @@ import { createUsername } from './util.js'
 
 export interface Profile {
     humanName: string
+    image: string
     author: string
     username: string
     rootDID: string
@@ -19,7 +20,8 @@ interface ProfileArgs {
     humanName:string,
     username?:string,
     description?:string,
-    rootDID?:string
+    rootDID?:string,
+    image:string  // a URL
 }
 
 /**
@@ -34,6 +36,7 @@ export async function create (crypto:Crypto.Implementation, args:ProfileArgs)
     return createMsg(crypto, Object.assign({}, args, {
         // author comes from `createMsg`
         timestamp: timestamp(),
+        image: args.image,
         username: (args.username || await createUsername(crypto)),
         rootDID: (args.rootDID || await writeKeyToDid(crypto))
     }))
