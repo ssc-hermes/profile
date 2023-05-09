@@ -6,7 +6,7 @@ import { createUsername } from './util.js'
 
 export interface Profile {
     humanName: string
-    image: string
+    image: string|null
     author: string
     username: string
     rootDID: string
@@ -21,7 +21,7 @@ interface ProfileArgs {
     username?:string,
     description?:string,
     rootDID?:string,
-    image:string  // a URL
+    image?:string  // a URL
 }
 
 /**
@@ -29,14 +29,14 @@ interface ProfileArgs {
  * assume that it is the DID being used to sign the message.
  * @param crypto {Crypto.Implementation}
  * @param args {{humanName, username, description?, rootDID?}}
- * @returns {Promise<SignedRequest<Profile>>} The new profile + signature
+ * @returns {Promise<SignedProfile>} The new profile + signature
  */
 export async function create (crypto:Crypto.Implementation, args:ProfileArgs)
 :Promise<SignedProfile> {
     return createMsg(crypto, Object.assign({}, args, {
         // author comes from `createMsg`
         timestamp: timestamp(),
-        image: args.image,
+        image: args.image || null,
         username: (args.username || await createUsername(crypto)),
         rootDID: (args.rootDID || await writeKeyToDid(crypto))
     }))
