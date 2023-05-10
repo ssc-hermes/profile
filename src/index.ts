@@ -6,7 +6,7 @@ import { createUsername } from './util.js'
 
 export interface Profile {
     humanName: string
-    image?: string
+    image?: string|null
     author: string
     username: string
     rootDID: string
