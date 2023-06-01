@@ -3,7 +3,6 @@ import * as odd from '@oddjs/odd'
 import { verify } from '@ssc-hermes/message'
 import { components } from '@ssc-hermes/node-components'
 import { writeKeyToDid } from '@ssc-hermes/util'
-import * as util from '../dist/util.js'
 import * as profile from '../dist/index.js'
 
 let program
@@ -36,7 +35,7 @@ test('profile.create', async t => {
 
 test('create username', async t => {
     const { crypto } = program.components
-    const username = await util.createUsername(crypto)
+    const username = await profile.createUsername(crypto)
     t.ok(username, 'should create a username')
     t.equal(typeof username, 'string', 'usernmae should be a string')
     t.equal(username.length, 32, 'should be 32 chars long')

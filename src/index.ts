@@ -1,8 +1,10 @@
 import timestamp from 'monotonic-timestamp'
+import { publicKeyToDid } from '@oddjs/odd/did/transformers'
+import { toString } from 'uint8arrays'
 import { Crypto } from '@oddjs/odd'
+import * as BrowserCrypto from '@oddjs/odd/components/crypto/implementation/browser'
 import { writeKeyToDid } from '@ssc-hermes/util'
 import { create as createMsg, SignedRequest } from '@ssc-hermes/message'
-import { createUsername } from './util.js'
 
 export interface Profile {
     humanName: string
@@ -40,4 +42,20 @@ export async function create (crypto:Crypto.Implementation, args:ProfileArgs)
         username: (args.username || await createUsername(crypto)),
         rootDID: (args.rootDID || await writeKeyToDid(crypto))
     }))
+}
+
+export async function createUsername (crypto:Crypto.Implementation):Promise<string> {
+    const did = await createDID(crypto)
+    const normalizedDid = did.normalize('NFD')
+    const hashedUsername = await BrowserCrypto.sha256(
+        new TextEncoder().encode(normalizedDid)
+    )
+
+    return toString(hashedUsername, 'base32').slice(0, 32)
+}
+
+export async function createDID (crypto: Crypto.Implementation): Promise<string> {
+    const pubKey = await crypto.keystore.publicExchangeKey()
+    const ksAlg = await crypto.keystore.getAlgorithm()
+    return publicKeyToDid(crypto, pubKey, ksAlg)
 }
