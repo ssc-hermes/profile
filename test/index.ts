@@ -5,7 +5,7 @@ import { components } from '@ssc-hermes/node-components'
 import { writeKeyToDid } from '@ssc-hermes/util'
 import * as profile from '../dist/index.js'
 
-let program
+let program:odd.Program
 
 test('setup', async t => {
     program = await odd.assemble({
