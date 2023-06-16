@@ -14,7 +14,7 @@
     "build-cjs": "esbuild src/*.ts --format=cjs --keep-names --outdir=./dist --out-extension:.js=.cjs",
     "build": "mkdir -p ./dist && rm -rf ./dist/* && npm run build-cjs && tsc",
     "preversion": "npm run lint",
-    "postversion": "git push && git push --tags && npm publish",
+    "postversion": "git push && git push --tags && export $(cat .env | xargs) && npm publish",
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
@@ -46,6 +46,9 @@
         "./dist/*.cjs"
       ]
     }
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
   },
   "types": "dist/index.d.ts",
   "typesVersions": {
