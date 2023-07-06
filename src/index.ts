@@ -44,8 +44,15 @@ export async function create (crypto:Crypto.Implementation, args:ProfileArgs)
     }))
 }
 
-export async function createUsername (crypto:Crypto.Implementation):Promise<string> {
-    const did = await createDID(crypto)
+export async function createUsername (crypto:Crypto.Implementation|string):
+Promise<string> {
+    let did:string
+    if (typeof crypto === 'string') {
+        did = crypto
+    } else {
+        did = await createDID(crypto as Crypto.Implementation)
+    }
+
     const normalizedDid = did.normalize('NFD')
     const hashedUsername = await BrowserCrypto.sha256(
         new TextEncoder().encode(normalizedDid)
