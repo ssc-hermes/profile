@@ -40,3 +40,11 @@ test('create username', async t => {
     t.equal(typeof username, 'string', 'usernmae should be a string')
     t.equal(username.length, 32, 'should be 32 chars long')
 })
+
+test('create a username from DID string', async t => {
+    const did:string = await program.agentDID()
+    const username = await profile.createUsername(did)
+    t.ok(username, 'should create a username')
+    t.equal(typeof username, 'string', 'usernmae should be a string')
+    t.equal(username.length, 32, 'should be 32 chars long')
+})
