@@ -5,14 +5,16 @@ import { Crypto } from '@oddjs/odd'
 import * as BrowserCrypto from '@oddjs/odd/components/crypto/implementation/browser'
 import { writeKeyToDid } from '@ssc-hermes/util'
 import { create as createMsg, SignedRequest } from '@ssc-hermes/message'
+import kebabCase from 'just-kebab-case'
 
 export interface Profile {
-    humanName: string
-    image?: string
-    author: string
-    username: string
-    rootDID: string
-    description?: string
+    humanName:string
+    url:string
+    image?:string
+    author:string
+    username:string
+    rootDID:string
+    description?:string
     timestamp:number
 }
 
@@ -38,6 +40,7 @@ export async function create (crypto:Crypto.Implementation, args:ProfileArgs)
     return createMsg(crypto, Object.assign({}, args, {
         // author comes from `createMsg`
         timestamp: timestamp(),
+        url: encodeURIComponent(kebabCase(args.humanName)),
         image: args.image || null,
         username: (args.username || await createUsername(crypto)),
         rootDID: (args.rootDID || await writeKeyToDid(crypto))

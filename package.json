@@ -20,6 +20,7 @@
   "dependencies": {
     "@ssc-hermes/message": "^0.4.1",
     "@ssc-hermes/util": "^0.7.0",
+    "just-kebab-case": "^4.2.0",
     "monotonic-timestamp": "^0.0.9",
     "uint8arrays": "^4.0.3"
   },
