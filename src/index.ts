@@ -9,7 +9,7 @@ import kebabCase from 'just-kebab-case'
 
 export interface Profile {
     humanName:string
-    url:string
+    urlName:string
     image?:string
     author:string
     username:string
@@ -40,7 +40,7 @@ export async function create (crypto:Crypto.Implementation, args:ProfileArgs)
     return createMsg(crypto, Object.assign({}, args, {
         // author comes from `createMsg`
         timestamp: timestamp(),
-        url: toUrl(args.humanName),
+        urlName: toUrl(args.humanName),
         image: args.image || null,
         username: (args.username || await createUsername(crypto)),
         rootDID: (args.rootDID || await writeKeyToDid(crypto))
