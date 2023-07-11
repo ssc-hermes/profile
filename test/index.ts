@@ -36,6 +36,11 @@ test('profile.create', async t => {
     t.equal(isValid, true, 'the new profile should have a valid signature')
 })
 
+test('to URL', t => {
+    const urlName = profile.toUrl('Alice 🐙')
+    t.equal(urlName, 'alice-%F0%9F%90%99', 'should URL encode the given username')
+})
+
 test('create username', async t => {
     const { crypto } = program.components
     const username = await profile.createUsername(crypto)

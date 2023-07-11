@@ -40,11 +40,15 @@ export async function create (crypto:Crypto.Implementation, args:ProfileArgs)
     return createMsg(crypto, Object.assign({}, args, {
         // author comes from `createMsg`
         timestamp: timestamp(),
-        url: encodeURIComponent(kebabCase(args.humanName)),
+        url: toUrl(args.humanName),
         image: args.image || null,
         username: (args.username || await createUsername(crypto)),
         rootDID: (args.rootDID || await writeKeyToDid(crypto))
     }))
+}
+
+export function toUrl (str:string) {
+    return encodeURIComponent(kebabCase(str))
 }
 
 export async function createUsername (crypto:Crypto.Implementation|string):
