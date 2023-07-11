@@ -19,11 +19,11 @@ test('setup', async t => {
 test('profile.create', async t => {
     const { crypto } = program.components
     const newProfile = await profile.create(crypto, {
-        humanName: 'alice 🐙'
+        humanName: 'Alice 🐙'
     })
 
     t.ok(newProfile, 'should return a new profile')
-    t.equal(newProfile.humanName, 'alice 🐙', 'should have the right human name')
+    t.equal(newProfile.humanName, 'Alice 🐙', 'should have the right human name')
     const did = await writeKeyToDid(crypto)
 
     t.equal(newProfile.url, 'alice-%F0%9F%90%99',
