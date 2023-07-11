@@ -7,6 +7,20 @@ Profile data for *hermes*.
 npm i -S @ssc-hermes/profile
 ```
 
+## profile type
+
+```ts
+interface Profile {
+    humanName: string
+    url: string  // <- a URL encoded string of the human name
+    author: string
+    username: string
+    rootDID: string
+    description?: string
+    timestamp:number
+}
+```
+
 ## example
 This creates a `profile` object in memory. You would then want to save the profile
 somehow.
@@ -26,11 +40,12 @@ const { crypto } = program.components
 // minimal parameters
 // this assumes that the rootDID is the current machine
 const newProfile = await profile.create(crypto, {
-    humanName: 'Alice'
+    humanName: 'Alice 🐙'
 })
 
 // => {
-//   humanName: 'Alice',
+//   humanName: 'Alice 🐙'
+//   url: 'alice-%F0%9F%90%99'  // <- a URL encoded string of the `humanName`
 //   timestamp: 1683435717111,
 //   username: 'fyrckpeigjv23y7bc572af6o7jyovstt',
 //   rootDID: 'did:key:z13V3S...',
@@ -64,17 +79,4 @@ test('create username', async t => {
     t.equal(typeof username, 'string', 'usernmae should be a string')
     t.equal(username.length, 32, 'should be 32 chars long')
 })
-```
-
-## profile type
-
-```ts
-interface Profile {
-    humanName: string
-    author: string
-    username: string
-    rootDID: string
-    description?: string
-    timestamp:number
-}
 ```
